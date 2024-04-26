@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="styleVP.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+  </head>
+  
+  <body>
+        <div id="main">
+            <div data-scroll data-scroll-speed="-5"id="VPpage">
+                <video src="VPbg.mp4" autoplay loop muted></video>
+
+                <label for="ownerName"></label>
+                <input type="text" id="userID" name="Username" placeholder="Enter Your Name" required> <br>
+                <label for="propertytype"></label>
+                <input type="text" id="propertytype" name="Property" placeholder="Enter Property Type" required> <br>
+                <label for="location"></label>
+                <input type="text" id="location" name="Location" placeholder="Enter Location of the Property" required> <br>
+
+                <button class="submit-VP" id="submit-VP">Submit</button>
+                <button class="close-VP" id="close-VP" onclick="verify()">Back</button>
+            </div>
+        </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+
+            <script>
+               // Get all video elements with data-scroll-speed="-5"
+               const videos = document.querySelectorAll('[data-scroll-speed="-5"] video');
+       
+               // Loop through each video element and set the playback rate
+               videos.forEach(video => {
+                   video.playbackRate = 0.9; // Adjust the playback rate as needed
+               });
+           </script>
+           <script>
+            function verify() {
+                window.location.assign("indexPO.html")
+            }
+           </script>
+           <script>
+            // Initialize Web3 with the provider (Ethereum network)
+            const web3 = new Web3(window.ethereum);
+            // Define your contract ABI and address
+            const contractABI = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "agreementId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "propertyOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "tenant",
+				"type": "address"
+			}
+		],
+		"name": "AgreementCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "agreementId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "propertyOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "tenant",
+				"type": "address"
+			}
+		],
+		"name": "AgreementTerminated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_propertyOwner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_tenant",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_propertyID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_duration",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_rentAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_depositAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_noticePeriod",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_otherDetails",
+				"type": "string"
+			}
+		],
+		"name": "createAgreement",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_ownersname",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_location",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_propertyType",
+				"type": "string"
+			}
+		],
+		"name": "registerProperty",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_agreementId",
+				"type": "uint256"
+			}
+		],
+		"name": "terminateAgreement",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "agreementCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "agreements",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "propertyOwner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "tenant",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "propertyID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "duration",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "rentAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "depositAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "noticePeriod",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "otherDetails",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "manager",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "properties",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "ownersname",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "propertyType",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "location",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]; // Replace with your actual ABI
+            const contractAddress = '0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8'; // Replace with your actual contract address
+
+            // Create a contract instance
+            const contract = new web3.eth.Contract(contractABI, contractAddress);
+            // Function to create a new agreement
+            // Function to register a property
+            async function registerProperty() {
+            const userName = document.getElementById('userID').value;
+            const propertyType = document.getElementById('propertytype').value;
+            const location = document.getElementById('location').value;
+
+            // Send a transaction to register a property
+            const accounts = await window.ethereum.enable(); // Request user's permission to use their account
+            const account = accounts[0]; // Use the first account
+
+            try {
+                const result = await contract.methods.registerProperty(
+                userName,
+                propertyType,
+                location
+                ).send({ from: account });
+                console.log(result); // Transaction receipt
+                // You can add code to handle success or show a confirmation message.
+            } catch (error) {
+                console.error(error);
+                // Handle errors here, e.g., display an error message to the user.
+            }
+            }
+            document.getElementById('submit-VP').addEventListener('click', registerProperty);
+           </script>
+     </body>
+   </html>

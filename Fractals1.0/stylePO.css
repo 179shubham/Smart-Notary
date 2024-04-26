@@ -1,0 +1,139 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+         height: 100%;
+         width: 100%;
+  }
+  
+  #main {
+          position: relative;
+          overflow: hidden;
+  }
+  
+  @font-face{
+              font-family: a;
+              src: url(./jost-variable.ttf);
+  
+              font-family: b;
+              src: url(./hk-grotesksemibold.ttf);
+  }
+  
+  #POpage {
+           height: 100vh;
+           width: 100vw;
+           background-color: #0b48ed;
+           position: relative;
+  }
+  
+  #POpage> video {
+                  height: 100%;
+                  width: 100%;
+                  object-fit: cover;
+                  
+  }
+  
+  .PObuttons {
+                 position: absolute;
+                 top: 0%;
+                 left: 0%;
+                 width: 100%;
+                 height: 100%;
+                 z-index: 1;
+  }
+  
+
+.vp {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #E5E9F3;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 50px;
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    transform: translate(-50%,-50%);
+    width: 15%;
+    height: 15%;
+    color: rgba(70, 113, 255);
+}
+
+.vp:hover {
+        background-color: #fff;
+        box-shadow: 0px 0px 100px #E5E9F3; /* Apply a glowing box shadow on hover */
+
+}
+
+.et {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #E5E9F3;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 50px;
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%,-50%);
+    width: 15%;
+    height: 15%;
+    color: rgba(70, 113, 255);
+}
+
+.et:hover {
+        background-color: #fff;
+        box-shadow: 0px 0px 100px #E5E9F3; /* Apply a glowing box shadow on hover */
+
+}
+
+.cc {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #E5E9F3;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 50px;
+    position: absolute;
+    top: 75%;
+    left: 15%;
+    transform: translate(-50%,-50%);
+    width: 15%;
+    height: 15%;
+    color: rgba(70, 113, 255);
+}
+
+.cc:hover {
+        background-color: #fff;
+        box-shadow: 0px 0px 100px #E5E9F3; /* Apply a glowing box shadow on hover */
+
+}
+
+.lo {
+        position: absolute;
+        top: 1.25%;
+        left: 1.25%;
+        font-size: 15px;
+        font-weight: bold;
+        margin-top: 10px;
+        background-color: #E5E9F3;
+        border: none;
+        padding: 10px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        color: rgba(70, 113, 255);
+    }
+    
+    .lo:hover {
+        background-color: #fff;
+        box-shadow: 0px 0px 100px #E5E9F3; /* Apply a glowing box shadow on hover */
+    }

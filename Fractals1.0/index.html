@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+  </head>
+  
+  <body>
+        <div id="main">
+             <div data-scroll data-scroll-speed="-5"id="page1">
+              <div class="page1bottom">
+                <button class="btn" id="lgb" type="button">Login / Sign Up</button>
+              </div>
+             <div class="popup" id="popup">
+                <div class="pbg">
+                    <video src="popupbg.mp4" autoplay loop muted></video>
+                </div>
+                <div class="popup-content">
+                    <button class="close-popup" id="close-popup">Close</button>
+                    
+                    <button class="po" id="owner" type="button">Property Owner</button>
+                    <button class="pm" id="manager">Property Manager</button>
+                    <button class="tt" id="tenant" onclick="tenant()">Tenant</button>
+                    <button class="ga" id="govt">Legal Agency</button>
+                </div>
+
+             </div>
+             <div class="login-popup-content" id="login-popup">
+                <video src="loginbg.mp4" autoplay loop muted></video>
+                <!-- Content for popup goes here -->
+                    <!-- Input for ID -->
+                    <label for="employeeID"></label>
+                    <input type="text" id="userID" name="Username" placeholder="Enter UserID" required> <br>
+                    <!-- Input for Password -->
+                    <label for="password"></label>
+                    <input type="password" id="password" name="password" placeholder="Enter Password" required> <br>
+                    <!-- New Register-->
+                    <button class="register" id="register" type="button"> Register </button>
+                <button class="login-close-popup" id="login-close-popup">Close</button>
+                <button class="login-submit-popup" id="login-submit-popup" onclick="direct()">Submit</button>
+            </div>
+              <video src="page1.mp4" autoplay loop muted></video>
+             </div>
+
+             <div data-scroll data-scroll-speed="-5"id="page2">
+               <img src="page2.png" alt=" ">
+             </div>
+
+             <div data-scroll data-scroll-speed="-5"id="page3">
+                <video src="page3.mp4" autoplay loop muted></video>
+             </div>
+
+             <div data-scroll data-scroll-speed="-5"id="page4">
+                <video src="page4.mp4" autoplay loop muted></video>
+             </div>
+
+             <div data-scroll data-scroll-speed="-5"id="page4">
+                <video src="page5.mp4" autoplay loop muted></video>
+             </div>
+        </div>
+
+         <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+         <script> src="script.js"</script>
+         <script>
+            // Get all video elements with data-scroll-speed="-5"
+            const videos = document.querySelectorAll('[data-scroll-speed="-5"] video');
+    
+            // Loop through each video element and set the playback rate
+            videos.forEach(video => {
+                video.playbackRate = 0.5; // Adjust the playback rate as needed
+            });
+        </script>
+        <script>
+            document.querySelector("#lgb").addEventListener("click",function(){
+                    document.querySelector(".popup").style.display = "flex";
+                })
+            document.querySelector(".close-popup").addEventListener("click", function(){
+                    document.querySelector(".popup").style.display = "none";
+                })    
+        </script>
+        <script>
+            document.querySelector("#owner").addEventListener("click",function(){
+                    document.querySelector("#login-popup").style.display = "flex";
+                })
+            document.querySelector(".login-close-popup").addEventListener("click", function(){
+                    document.querySelector("#login-popup").style.display = "none";
+                }) 
+        </script>
+        <!--<script>
+            document.querySelector("#manager").addEventListener("click",function(){
+                    document.querySelector("#login-popup").style.display = "flex";
+                })
+            document.querySelector(".login-close-popup").addEventListener("click", function(){
+                    document.querySelector("#login-popup").style.display = "none";
+                }) 
+        </script>
+        <script>
+            document.querySelector("#tenant").addEventListener("click",function(){
+                    document.querySelector("#login-popup").style.display = "flex";
+                })
+            document.querySelector(".login-close-popup").addEventListener("click", function(){
+                    document.querySelector("#login-popup").style.display = "none";
+                }) 
+        </script>
+        <script>
+            document.querySelector("#govt").addEventListener("click",function(){
+                    document.querySelector("#login-popup").style.display = "flex";
+                })
+            document.querySelector(".login-close-popup").addEventListener("click", function(){
+                    document.querySelector("#login-popup").style.display = "none";
+                }) 
+        </script>-->
+         <script>
+            function direct(){
+                window.location.assign("indexPO.html")
+            }
+        </script>
+        <script>
+            function tenant(){
+                window.location.assign("property.html")
+            }
+        </script>
+  </body>
+</html>

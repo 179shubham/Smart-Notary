@@ -1,0 +1,339 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+         height: 100%;
+         width: 100%;
+  }
+  
+  #main {
+          position: relative;
+          overflow: hidden;
+  }
+  
+  @font-face{
+              font-family: a;
+              src: url(./jost-variable.ttf);
+  
+              font-family: b;
+              src: url(./hk-grotesksemibold.ttf);
+  }
+  
+  #page1FO {
+           height: 100vh;
+           width: 100vw;
+           background-color: #FFDE59;
+           position: relative;
+  }
+  
+  #page1FO> video {
+                  height: 100%;
+                  width: 100%;
+                  object-fit: cover;
+                  
+  }
+  
+  .page1FObottom {
+                 position: absolute;
+                 bottom: 5%;
+                 left: 73.5%;
+                 transform: translate(-50%,-50%);
+                 z-index: 1;
+  }
+  
+  .page1FObottom> .btn {
+    font-size: 20px;
+    font-weight: bold;
+    width: 550px;
+    height: 55px;
+    padding: 0px;
+    background-color: #FF914D;
+    border: 1px solid #E5E9F3;
+    border-radius: 50px;
+    color: #fff;
+    transition: box-shadow 0.3s ease;
+}
+
+.page1FObottom > .btn:hover {
+           box-shadow: 0px 0px 100px #FF914D; /* Apply a glowing box shadow on hover */
+}
+
+  
+  #page2FO {
+           height: 100vh;
+           width: 100vw;
+           background-color: #FFDE59;
+           position: relative;
+  }
+  
+  #page2FO> img {
+                  height: 100%;
+                  width: 100%;
+                  object-fit: cover;
+  }
+  
+  #page3FO {
+            height: 100vh;
+            width: 100vw;
+            background-color: #FFDE59;
+            position: relative;
+  }
+  
+  #page3FO> video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  #page4FO {
+            height: 100vh;
+            width: 100vw;
+            background-color: #FFDE59;
+            position: relative;
+  }
+  
+  #page4FO> video {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+  }
+  
+  #page5FO {
+    height: 100vh;
+    width: 100vw;
+    background-color: #FFDE59;
+    position: relative;
+  }
+
+  #page5FO> video {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+  }
+
+    /* Popup styles */
+#popup {
+    display:none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #FFDE59;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.pbg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.pbg> video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        position: relative;
+}
+
+.popup-content {
+    background-color: #FFDE59;
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 0%;
+    height: 0%;
+    z-index: 3;
+}
+
+.close-popup {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #FF914D;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    transform: translate(-50%,-50%);
+    color: #FFDE59;
+}
+
+.close-popup:hover {
+        background-color: #ff7927;
+}
+
+.po {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #FF914D;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 100px;
+    position: absolute;
+    top: 35%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    width: 20%;
+    height: 20%;
+    color: #fff;
+}
+
+.po:hover {
+        background-color: #FFDE59;
+        box-shadow: 0px 0px 100px #FFDE59; /* Apply a glowing box shadow on hover */
+
+}
+
+.pb {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #FF914D;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 100px;
+    position: absolute;
+    top: 65%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    width: 20%;
+    height: 20%;
+    color: #fff;
+}
+
+.pb:hover {
+        background-color: #FFDE59;
+        box-shadow: 0px 0px 100px #FFDE59; /* Apply a glowing box shadow on hover */
+}
+
+#login-popup {
+    display:none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(245, 87, 87, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+}
+
+.login-popup-content {
+    display: none;
+    background-color: #ffd67d;
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    transform: translate(0%,0%);
+}
+
+.login-popup-content> video {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+}
+
+label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1d1d1d;
+}
+
+/* Style for input fields */
+input[type="text"] {
+                    position: absolute;
+                    top: 27.5%;
+                    left: 22.5%;
+                    width: 300px;
+                    height: 50px;
+                    padding: 10px;
+                    margin-top: 50px;
+                    border: none;
+                    border-radius: 50px;
+}
+input[type="password"] {
+                    position: absolute;
+                    top: 44.5%;
+                    left: 22.5%;
+                    width: 300px;
+                    height: 50px;
+                    padding: 10px;
+                    margin-top: 20px;
+                    border: none;
+                    border-radius: 50px;
+}
+
+.register {
+    position: absolute;
+    bottom: 5.75%;
+    left: 22.5%;
+    font-size: 15px;
+    font-weight: bold;
+    width: 300px;
+    height: 50px;
+    padding: 0px;
+    background-color: #fff;
+    border: 1px solid #E5E9F3;
+    border-radius: 50px;
+    color: #FFDE59;
+    transition: box-shadow 0.3s ease;
+}
+
+.register:hover {
+    background-color: #ff7927;
+}
+
+
+/* Close button for the login-popup */
+.login-close-popup {
+    position: absolute;
+    top: 2.25%;
+    right: 4.25%;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #FFDE59;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.login-close-popup:hover {
+    background-color: #ff7927;
+}
+
+/* Submit button for the login-popup */
+.login-submit-popup {
+    position: absolute;
+    bottom: 30%;
+    left: 30%;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 0px;
+    background-color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #FFDE59;
+}
+
+.login-submit-popup:hover {
+    background-color: #ff7927;
+}

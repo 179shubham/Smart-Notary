@@ -1,0 +1,175 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+         height: 100%;
+         width: 100%;
+  }
+  
+  #main {
+          position: relative;
+          overflow: hidden;
+  }
+  
+  @font-face{
+              font-family: a;
+              src: url(./jost-variable.ttf);
+  
+              font-family: b;
+              src: url(./hk-grotesksemibold.ttf);
+  }
+  
+  #CCpage {
+           height: 100vh;
+           width: 100vw;
+           background-color: #0b48ed;
+           position: relative;
+  }
+  
+  #CCpage> video {
+                  height: 100%;
+                  width: 100%;
+                  object-fit: cover;
+                  
+  }
+
+  label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1d1d1d;
+}
+
+/* Style for input fields */
+input[type="text"][id="ownerID"] {
+                    position: absolute;
+                    top: 18%;
+                    left: 25%;
+                    width: 300px;
+                    height: 50px;
+                    padding: 10px;
+                    margin-top: 50px;
+                    border: none;
+                    border-radius: 50px;
+}
+input[type="text"][id="tenantID"] {
+    position: absolute;
+    top: 33.5%;
+    left: 25%;
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin-top: 50px;
+    border: none;
+    border-radius: 50px;
+}
+input[type="text"][id="propertyID"] {
+                    position: absolute;
+                    top: 53.5%;
+                    left: 25%;
+                    width: 300px;
+                    height: 50px;
+                    padding: 10px;
+                    margin-top: 20px;
+                    border: none;
+                    border-radius: 50px;
+}
+input[type="number"][id="duration"] {
+    position: absolute;
+    top: 22.5%;
+    left: 72%;
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 50px;
+}
+input[type="number"][id="rent"] {
+    position: absolute;
+    top: 38%;
+    left: 71.90%;
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 50px;
+}
+input[type="number"][id="deposit"] {
+    position: absolute;
+    top: 53%;
+    left: 72%;
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 50px;
+}
+input[type="number"][id="period"] {
+    position: absolute;
+    top: 68.5%;
+    left: 71.90%;
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 50px;
+}
+input[type="text"][id="other"] {
+    position: absolute;
+    top: 69%;
+    left: 25%;
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 50px;
+}
+
+.submit-CC {
+    position: absolute;
+    bottom: 5%;
+    left: 45%;
+    font-size: 17px;
+    font-weight: bolder;
+    margin-top: 0px;
+    background-color: rgba(70, 113, 255);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50px;
+    width: 15%;
+    height: 7.25%;
+    color: #E5E9F3;
+}
+
+.submit-CC:hover {
+    background-color: #fff;
+    color:rgba(70, 113, 255);
+}
+
+.close-CC {
+    position: absolute;
+    top: 1.25%;
+    left: 1.25%;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: rgba(70, 113, 255);
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #E5E9F3;
+}
+
+.close-CC:hover {
+    background-color: #fff;
+    color:rgba(70, 113, 255);
+}

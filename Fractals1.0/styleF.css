@@ -1,0 +1,254 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+         height: 100%;
+         width: 100%;
+  }
+  
+  #main {
+          position: relative;
+          overflow: hidden;
+  }
+  
+  @font-face{
+              font-family: a;
+              src: url(./jost-variable.ttf);
+  
+              font-family: b;
+              src: url(./hk-grotesksemibold.ttf);
+  }
+  
+  #pageF1 {
+           height: 100vh;
+           width: 100vw;
+           background-color: #cd4646;
+           position: relative;
+  }
+  
+  #pageF1> video {
+                  height: 100%;
+                  width: 100%;
+                  object-fit: cover;
+                  
+  }
+  
+  .pageF1bottom {
+                 position: absolute;
+                 bottom: 5%;
+                 right: 16.5%;
+                 transform: translate(-50%,-50%);
+                 z-index: 1;
+  }
+  
+  .pageF1bottom> .btn {
+    font-size: 20px;
+    font-weight: bold;
+    width: 550px;
+    height: 55px;
+    padding: 0px;
+    background-color: #cd4646;
+    border: 1px solid #E5E9F3;
+    border-radius: 50px;
+    color: #fff;
+    transition: box-shadow 0.3s ease;
+}
+
+.pageF1bottom > .btn:hover {
+           box-shadow: 0px 0px 100px #cd4646; /* Apply a glowing box shadow on hover */
+}
+
+  
+  #pageF2 {
+           height: 100vh;
+           width: 100vw;
+           background-color: #cd4646;
+           position: relative;
+  }
+  
+  #pageF2> img {
+                  height: 100%;
+                  width: 100%;
+                  object-fit: cover;
+  }
+  
+  #pageF3 {
+            height: 100vh;
+            width: 100vw;
+            background-color: #cd4646;
+            position: relative;
+  }
+  
+  #pageF3> video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  #pageF4 {
+            height: 100vh;
+            width: 100vw;
+            background-color: #cd4646;
+            position: relative;
+  }
+  
+  #pageF4> video {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+  }
+  
+  #pageF5 {
+    height: 100vh;
+    width: 100vw;
+    background-color: #cd4646;
+    position: relative;
+  }
+
+  #pageF5> video {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+  }
+
+  #pageF6 {
+    height: 100vh;
+    width: 100vw;
+    background-color: #cd4646;
+    position: relative;
+  }
+
+  #pageF6> video {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+  }  
+
+    /* Popup styles */
+#popup {
+    display:none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(245, 87, 87, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.pbg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.pbg> video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        position: relative;
+}
+
+.popup-content {
+    background-color: #ffd67d;
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 0%;
+    height: 0%;
+    z-index: 3;
+}
+
+.close-popup {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #cd4646;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    transform: translate(-50%,-50%);
+    color: #fff;
+}
+
+.close-popup:hover {
+        background-color: #c25959;
+}
+
+.bi {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #cd4646;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 100px;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    width: 20%;
+    height: 20%;
+    color: #fff;
+}
+
+.bi:hover {
+        background-color: #cd4646;
+        box-shadow: 0px 0px 100px #cd4646; /* Apply a glowing box shadow on hover */
+
+}
+
+.sn {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #cd4646;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 100px;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    width: 20%;
+    height: 20%;
+    color: #fff;
+}
+
+.sn:hover {
+        background-color: #cd4646;
+        box-shadow: 0px 0px 100px #cd4646; /* Apply a glowing box shadow on hover */
+}
+
+.fo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  background-color: #cd4646;
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  border-radius: 100px;
+  position: absolute;
+  top: 80%;
+  left: 30%;
+  transform: translate(-50%,-50%);
+  width: 20%;
+  height: 20%;
+  color: #fff;
+}
+
+.fo:hover {
+      background-color: #cd4646;
+      box-shadow: 0px 0px 100px #cd4646; /* Apply a glowing box shadow on hover */
+}
