@@ -7,23 +7,118 @@
         <link rel="stylesheet" href="styleVP.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
   </head>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+	import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyDqLvXTpXv2Y7IJOnBoOa_gv-hp3O2ajBY",
+        authDomain: "todoappsoham-e31ee.firebaseapp.com",
+        projectId: "todoappsoham-e31ee",
+        storageBucket: "todoappsoham-e31ee.appspot.com",
+        messagingSenderId: "755736739149",
+        appId: "1:755736739149:web:f4b7a57ba375f40762cb04",
+        measurementId: "G-3L2BP6MLT8"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+    const db = getFirestore();
+	const storage = getStorage();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginForm = document.getElementById('Vp-form');
+
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const userEmail = localStorage.getItem('userEmail');
+
+            // Retrieve form input values
+            const ownerName = document.getElementById('userID').value;
+            const propertyType = document.getElementById('propertytype').value;
+            const location = document.getElementById('location').value;
+			const imageFile = document.getElementById('imgu').files[0]; // Get the uploaded image file
+        	const pdfFile = document.getElementById('pdfu').files[0]; // Get the uploaded PDF file
+
+
+            try {
+				
+				// Upload image to Firebase Storage
+				const imageRef = ref(storage, `img/${imageFile.name}`);
+				const imageSnapshot = await uploadBytes(imageRef, imageFile);
+				console.log('Image uploaded successfully:', imageSnapshot);
+
+				// Get image download URL
+				const imageURL = await getDownloadURL(imageRef);
+
+				// Upload PDF to Firebase Storage
+				const pdfRef = ref(storage, `pdf/${pdfFile.name}`);
+				const pdfSnapshot = await uploadBytes(pdfRef, pdfFile);
+				console.log('PDF uploaded successfully:', pdfSnapshot);
+
+				// Get PDF download URL
+				const pdfURL = await getDownloadURL(pdfRef);
+
+
+                // Add the verified property information to Firestore
+                const docRef = await addDoc(collection(db, 'users', userEmail, 'VerifiedProperty'), {
+                    ownerName: ownerName,
+                    propertyType: propertyType,
+                    location: location,
+					imageUrl: imageURL,
+					pdfUrl: pdfURL,
+					isChecked: false 
+                });
+
+                // Display success message or perform further actions
+                alert('Property information submitted successfully');
+				loginForm.reset();
+            } catch (error) {
+                console.error('Error adding property information:', error);
+                // Display error message to user
+                alert('Failed to submit property information. Please try again.');
+            }
+        });
+    });
+
+</script>
+
+
   
   <body>
-        <div id="main">
-            <div data-scroll data-scroll-speed="-5"id="VPpage">
-                <video src="VPbg.mp4" autoplay loop muted></video>
+	<div id="main">
+		<div data-scroll data-scroll-speed="-5" id="VPpage">
+			<video src="VPbg.mp4" autoplay loop muted></video>
+			<form id="Vp-form">
+				<label for="ownerName"></label>
+				<input type="text" id="userID" name="Username" placeholder="Enter Your Name" required> <br>
+				<label for="propertytype"></label>
+				<input type="text" id="propertytype" name="Property" placeholder="Enter Property Type" required> <br>
+				<label for="location"></label>
+				<input type="text" id="location" name="Location" placeholder="Enter Location of the Property" required> <br>
 
-                <label for="ownerName"></label>
-                <input type="text" id="userID" name="Username" placeholder="Enter Your Name" required> <br>
-                <label for="propertytype"></label>
-                <input type="text" id="propertytype" name="Property" placeholder="Enter Property Type" required> <br>
-                <label for="location"></label>
-                <input type="text" id="location" name="Location" placeholder="Enter Location of the Property" required> <br>
+				<label for="imgu"></label>
+				<input type="file" id="imgu" name="img" accept="image/*" placeholder="Upload Image"> <br>
 
-                <button class="submit-VP" id="submit-VP">Submit</button>
-                <button class="close-VP" id="close-VP" onclick="verify()">Back</button>
-            </div>
-        </div>
+				<label for="pdfu"></label>
+				<input type="file" id="pdfu" name="pdf" accept="application/pdf" placeholder="Upload Pdf"> <br>
+
+				<button class="submit-VP" id="submit-VP" type="submit">Submit</button>
+				<button class="close-VP" id="close-VP" onclick="verify()">Back</button>
+			</form>
+		</div>
+	</div>
+	
 
             <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -326,7 +421,7 @@
                 // Handle errors here, e.g., display an error message to the user.
             }
             }
-            document.getElementById('submit-VP').addEventListener('click', registerProperty);
+            document.getElementById('submit-VPP').addEventListener('click', registerProperty);
            </script>
      </body>
    </html>

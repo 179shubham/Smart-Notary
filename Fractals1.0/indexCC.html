@@ -1,352 +1,548 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="styleCC.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
-  </head>
-  
-  <body>
-        <div id="main">
-            <div data-scroll data-scroll-speed="-5"id="CCpage">
-                <video src="CCbg.mp4" autoplay loop muted></video>
 
-                <label for="ownerName"></label>
-                <input type="text" id="ownerID" name="Username" placeholder="Enter Owner's Name" required> <br>
-                <label for="tenantName"></label>
-                <input type="text" id="tenantID" name="Username" placeholder="Enter Tenant's Name" required> <br>
-                <label for="propertyID"></label>
-                <input type="text" id="propertyID" name="Property" placeholder="Enter PropertyID" required> <br>
-                <label for="duration"></label>
-                <input type="number" id="duration" name="Duration" placeholder="Enter Duration in Months" required> <br>
-                <label for="rent"></label>
-                <input type="number" id="rent" name="Rent" placeholder="Enter Rent Amount per Month" required> <br>
-                <label for="deposit"></label>
-                <input type="number" id="deposit" name="Deposit" placeholder="Enter Deposit Amount" required> <br>
-                <label for="period"></label>
-                <input type="number" id="period" name="Period" placeholder="Enter Notice Period in Days" required> <br>
-                <label for="other"></label>
-                <input type="text" id="other" name="Other" placeholder="Enter Other Details" required> <br>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="styleCC.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+</head>
 
-                <button class="submit-CC" id="submit-CC" >Submit</button>
-                <button class="close-CC" id="close-CC" onclick="create()">Back</button>
-            </div>
-        </div>
+<style>
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 
-            <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
 
-            <script>
-               // Get all video elements with data-scroll-speed="-5"
-               const videos = document.querySelectorAll('[data-scroll-speed="-5"] video');
-       
-               // Loop through each video element and set the playback rate
-               videos.forEach(video => {
-                   video.playbackRate = 0.9; // Adjust the playback rate as needed
-               });
-           </script>
-           <script>
-            function create() {
-                window.location.assign("indexPO.html")
-            }
-           </script>
-           <script>
-            // Initialize Web3 with the provider (Ethereum network)
-                const web3 = new Web3(window.ethereum);
-                // Define your contract ABI and address
-                const contractABI = [
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "agreementId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "propertyOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "tenant",
-				"type": "address"
-			}
-		],
-		"name": "AgreementCreated",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "agreementId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "propertyOwner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "tenant",
-				"type": "address"
-			}
-		],
-		"name": "AgreementTerminated",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_propertyOwner",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_tenant",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_propertyID",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_duration",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_rentAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_depositAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_noticePeriod",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_otherDetails",
-				"type": "string"
-			}
-		],
-		"name": "createAgreement",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_ownersname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_location",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_propertyType",
-				"type": "string"
-			}
-		],
-		"name": "registerProperty",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_agreementId",
-				"type": "uint256"
-			}
-		],
-		"name": "terminateAgreement",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "agreementCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "agreements",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "propertyOwner",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "tenant",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "propertyID",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "duration",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "rentAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "depositAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "noticePeriod",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "otherDetails",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "manager",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "properties",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "ownersname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "propertyType",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "location",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
-]; // ABI
-                const contractAddress = '0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8'; // contract address
+/* Modal Styles */
+.modal-header {
+    justify-content: center; /* Center content horizontally */
+    border-bottom: none; /* Remove border bottom */
+}
 
-                // Create a contract instance
-                const contract = new web3.eth.Contract(contractABI, contractAddress);
-                // Function to create a new agreement
-                async function createAgreement() {
-                const ownerName = document.getElementById('ownerID').value;
-                const tenantName = document.getElementById('tenantID').value;
-                const propertyID = document.getElementById('propertyID').value;
-                const duration = document.getElementById('duration').value;
-                const rent = document.getElementById('rent').value;
-                const deposit = document.getElementById('deposit').value;
-                const period = document.getElementById('period').value;
-                const other = document.getElementById('other').value;
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
 
-                // Send a transaction to create a new agreement
-                const accounts = await window.ethereum.enable(); // Request user's permission to use their account
-                const account = accounts[0]; // Use the first account
+.modal-content {
+    background-color: #fff; /* White background */
+    border-radius: 20px; /* Rounded corners */
+}
 
-                try {
-                    const result = await contract.methods.createAgreement(
-                    account,
-                    tenantName,
-                    propertyID,
-                    duration,
-                    rent,
-                    deposit,
-                    period,
-                    other
-                    ).send({ from: account });
-                    console.log(result); // Transaction receipt
-                    // You can add code to handle success or show a confirmation message.
-                } catch (error) {
-                    console.error(error);
-                    // Handle errors here, e.g., display an error message to the user.
-                }
-                }
+.card {
+    max-width: 500px;
+    margin: auto;
+    color: black;
+    border-radius: 20px;
+    padding: 20px;
+}
 
-                document.getElementById('submit-CC').addEventListener('click', createAgreement);
-           </script>
-     </body>
-   </html>
+.row {
+    margin-bottom: 15px; /* Spacing between rows */
+}
+
+.text {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-control {
+    color: black;
+    background-color: #f2f2f2; /* Light gray background */
+    border: 2px solid transparent;
+    height: 50px;
+    padding: 0 15px; /* Horizontal padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #6c757d; /* Gray border color on focus */
+}
+
+.btn-primary {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6c757d; /* Gray background */
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Hover Effects */
+.btn-primary:hover {
+    background-position: left;
+}
+
+.btn-primary:hover .fas.fa-arrow-right {
+    transform: translateX(-5px); /* Move arrow icon to the left */
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+    .modal-content {
+        border-radius: 0; /* Remove border-radius on small screens */
+    }
+
+    .btn {
+        height: 40px; /* Reduce button height on small screens */
+        font-size: 14px; /* Reduce font size on small screens */
+    }
+}
+
+
+	
+</style>
+
+
+<body>
+	<div id="main">
+		<div data-scroll data-scroll-speed="-5" id="CCpage">
+			<video src="CCbg.mp4" autoplay loop muted></video>
+
+			<label for="ownerName"></label>
+			<input type="text" id="ownerID" name="Username" placeholder="Enter Owner's Name" required> <br>
+			<label for="tenantName"></label>
+			<input type="text" id="tenantID" name="Username" placeholder="Enter Tenant's Name" required> <br>
+			<label for="propertyID"></label>
+			<input type="text" id="propertyID" name="Property" placeholder="Enter PropertyID" required> <br>
+			<label for="duration"></label>
+			<input type="number" id="duration" name="Duration" placeholder="Enter Duration in Months" required> <br>
+			<label for="rent"></label>
+			<input type="number" id="rent" name="Rent" placeholder="Enter Rent Amount per Month" required> <br>
+			<label for="deposit"></label>
+			<input type="number" id="deposit" name="Deposit" placeholder="Enter Deposit Amount" required> <br>
+			<label for="period"></label>
+			<input type="number" id="period" name="Period" placeholder="Enter Notice Period in Days" required> <br>
+			<label for="other"></label>
+			<input type="text" id="other" name="Other" placeholder="Enter Other Details" required> <br>
+
+			<button class="submit-CC" id="submit-CC">Submit</button>
+			<button class="submit-CCBY" id="submit-CCBY">Submit</button>
+
+
+
+			<button class="close-CC" id="close-CC" onclick="create()">Back</button>
+		</div>
+	</div>
+
+	<!-- Bootstrap Modal -->
+	<div class="modal" id="myModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header align-items-center"> <!-- Add align-items-center class here -->
+					<h5 class="modal-title mx-auto">Payment Details</h5> <!-- Add mx-auto class here -->
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="container p-0">
+					<div class="card px-4">
+						
+						<div class="row gx-3">
+							<div class="col-12">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">Person Name</p>
+									<input class="form-control mb-3" type="text" placeholder="Enter Name" required>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">Card Number</p>
+									<input class="form-control mb-3" type="text" placeholder="1234 5678 435678">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">Expiry</p>
+									<input class="form-control mb-3" type="text" placeholder="MM/YYYY">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">CVV/CVC</p>
+									<input class="form-control mb-3 pt-2 " type="password" placeholder="***">
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="btn btn-primary mb-3">
+									<span class="ps-3">Make Payment</span>
+									<span class="fas fa-arrow-right"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<!-- Add additional buttons or content here -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+		integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+		integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+	<!-- Bootstrap Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script>
+		// Get all video elements with data-scroll-speed="-5"
+		const videos = document.querySelectorAll('[data-scroll-speed="-5"] video');
+
+		// Loop through each video element and set the playback rate
+		videos.forEach(video => {
+			video.playbackRate = 0.9; // Adjust the playback rate as needed
+		});
+	</script>
+	<script>
+		function create() {
+			window.location.assign("indexPO.html")
+		}
+	</script>
+
+
+
+	<script>
+		// Initialize Web3 with the provider (Ethereum network)
+		const web3 = new Web3(window.ethereum);
+		// Define your contract ABI and address
+		const contractABI = [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "propertyOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "tenant",
+						"type": "address"
+					}
+				],
+				"name": "AgreementCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "agreementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "propertyOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "tenant",
+						"type": "address"
+					}
+				],
+				"name": "AgreementTerminated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_propertyOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_tenant",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_propertyID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_duration",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_rentAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_depositAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_noticePeriod",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_otherDetails",
+						"type": "string"
+					}
+				],
+				"name": "createAgreement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_ownersname",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_location",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_propertyType",
+						"type": "string"
+					}
+				],
+				"name": "registerProperty",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_agreementId",
+						"type": "uint256"
+					}
+				],
+				"name": "terminateAgreement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "agreementCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "agreements",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "propertyOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "tenant",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "propertyID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rentAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "depositAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "noticePeriod",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "otherDetails",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "manager",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "properties",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "ownersname",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "propertyType",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		]; // ABI
+		const contractAddress = '0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8'; // contract address
+
+		// Create a contract instance
+		const contract = new web3.eth.Contract(contractABI, contractAddress);
+		// Function to create a new agreement
+		async function createAgreement() {
+			const ownerName = document.getElementById('ownerID').value;
+			const tenantName = document.getElementById('tenantID').value;
+			const propertyID = document.getElementById('propertyID').value;
+			const duration = document.getElementById('duration').value;
+			const rent = document.getElementById('rent').value;
+			const deposit = document.getElementById('deposit').value;
+			const period = document.getElementById('period').value;
+			const other = document.getElementById('other').value;
+
+			// Send a transaction to create a new agreement
+			const accounts = await window.ethereum.enable(); // Request user's permission to use their account
+			const account = accounts[0]; // Use the first account
+
+			try {
+				const result = await contract.methods.createAgreement(
+					account,
+					tenantName,
+					propertyID,
+					duration,
+					rent,
+					deposit,
+					period,
+					other
+				).send({ from: account });
+				console.log(result); // Transaction receipt
+				// You can add code to handle success or show a confirmation message.
+			} catch (error) {
+				console.error(error);
+				// Handle errors here, e.g., display an error message to the user.
+			}
+		}
+
+		// Open modal when button with id "submit-CCBY" is clicked
+		document.getElementById('submit-CCBY').addEventListener('click', () => {
+			const modal = new bootstrap.Modal(document.getElementById('myModal'));
+			modal.show();
+		});
+
+		// Close modal when button with class "btn-close" or "btn-secondary" is clicked
+		document.querySelectorAll('.btn-close').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const modal = new bootstrap.Modal(document.getElementById('myModal'));
+				modal.hide();
+			});
+		});
+
+		document.getElementById('submit-CC').addEventListener('click', createAgreement);
+	</script>
+</body>
+
+</html>

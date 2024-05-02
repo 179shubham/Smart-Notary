@@ -58,6 +58,7 @@
 }
 
 .page1bottom > .btn:hover {
+           cursor: pointer;
            box-shadow: 0px 0px 100px rgba(70, 113, 255, 0.7); /* Apply a glowing box shadow on hover */
 }
 
@@ -305,19 +306,19 @@ label {
 /* Style for input fields */
 input[type="text"] {
                     position: absolute;
-                    top: 27.5%;
-                    left: 22.5%;
+                    top: 28.5%;
+                    left: 25.5%;
                     width: 300px;
                     height: 50px;
                     padding: 10px;
-                    margin-top: 50px;
+                    margin-top: 70px;
                     border: none;
                     border-radius: 50px;
 }
 input[type="password"] {
                     position: absolute;
-                    top: 44.5%;
-                    left: 22.5%;
+                    top: 45.5%;
+                    left: 25.5%;
                     width: 300px;
                     height: 50px;
                     padding: 10px;
@@ -329,20 +330,27 @@ input[type="password"] {
 .register {
     position: absolute;
     top: 59.5%;
-    left: 22.5%;
-    font-size: 15px;
-    font-weight: bold;
+    left: 25.5%;
+    font-size: 20px;
+    font-weight: bolder;
     width: 300px;
     height: 50px;
     padding: 0px;
     background-color: #fff;
     border: 1px solid #E5E9F3;
-    border-radius: 50px;
+    border-radius: 20px;
     color: rgb(70, 113, 255);
     transition: box-shadow 0.3s ease;
+    font-family: 'Roboto', sans-serif; /* Use Roboto font */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 1px; /* Add a bit of letter spacing */
 }
 
+/* Add hover effect */
 .register:hover {
+    cursor: pointer;
+    border-color: black;
+    box-shadow: 0 0 3px 3px white;
     background-color: azure;
 }
 
@@ -370,19 +378,28 @@ input[type="password"] {
 /* Submit button for the login-popup */
 .login-submit-popup {
     position: absolute;
-    bottom: 10%;
-    left: 24.75%;
-    font-size: 15px;
-    font-weight: bold;
-    margin-top: 0px;
-    background-color: #fff;
-    border: none;
+    bottom: 20%;
+    left: 15%;
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bolder;
     padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #E5E9F3;
+    border-radius: 20px;
+    transition: box-shadow 0.3s ease;
     cursor: pointer;
-    border-radius: 5px;
     color: rgba(70, 113, 255);
+    font-family: 'Roboto', sans-serif; /* Use Roboto font */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 1px; /* Add a bit of letter spacing */
 }
 
 .login-submit-popup:hover {
+    cursor: pointer;
+    border-color: black;
+    box-shadow: 0 0 3px 3px white;
     background-color: azure;
 }
+

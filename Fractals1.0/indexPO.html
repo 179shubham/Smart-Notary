@@ -6,6 +6,7 @@
         <title>Document</title>
         <link rel="stylesheet" href="stylePO.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   </head>
   
   <body>
@@ -15,8 +16,12 @@
                     <button class="vp" id="verify" type="button" onclick="verify()">Verify Your Property</button>
                     <button class="et" id="tenants"type="button" onclick="tenants()">Explore Tenants</button>
                     <button class="cc" id="create" type="button" onclick="create()">Create Contracts</button>
-
-                    <button class="lo" id="logout" type="button" onclick="logout()">Log Out</button>
+                    <div class="iconplusbtn">
+                        <button class="logout-btn" id="logout" type="button" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Sign Out
+                        </button>
+                    </div>                    
+                    
                 </div>
                     <video src="POpage.mp4" autoplay loop muted></video>
                 </div>
@@ -52,6 +57,8 @@
            </script>
            <script>
             function logout() {
+                // Remove user's email from localStorage on logout
+                localStorage.removeItem('userEmail');
                 window.location.assign("index.html")
             }
            </script>
