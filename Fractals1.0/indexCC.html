@@ -24,18 +24,30 @@
 
 /* Modal Styles */
 .modal-header {
-    justify-content: center; /* Center content horizontally */
     border-bottom: none; /* Remove border bottom */
+}
+
+.modal-footer{
+	border: none;
 }
 
 .modal-title {
     font-size: 1.5rem;
     font-weight: 700;
+	padding-right: 210px;
 }
 
 .modal-content {
     background-color: #fff; /* White background */
     border-radius: 20px; /* Rounded corners */
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 7px;
+}
+
+.makepy {
+	padding-top: 10px;
+	border-radius: 20px;
 }
 
 .card {
@@ -44,6 +56,10 @@
     color: black;
     border-radius: 20px;
     padding: 20px;
+}
+
+.mainpycon {
+	height: 460px;
 }
 
 .row {
@@ -68,6 +84,7 @@
     outline: none;
     border-color: #6c757d; /* Gray border color on focus */
 }
+
 
 .btn-primary {
     width: 100%;
@@ -163,7 +180,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="container p-0">
-					<div class="card px-4">
+					<div class="card px-4 mainpycon">
 						
 						<div class="row gx-3">
 							<div class="col-12">
@@ -178,6 +195,12 @@
 									<input class="form-control mb-3" type="text" placeholder="1234 5678 435678">
 								</div>
 							</div>
+							<div class="col-12">
+								<div class="d-flex flex-column">
+									<p class="text mb-1">Amount</p>
+									<input class="form-control mb-3" type="text" value="INR 2.0" readonly >
+								</div>
+							</div>
 							<div class="col-6">
 								<div class="d-flex flex-column">
 									<p class="text mb-1">Expiry</p>
@@ -190,7 +213,7 @@
 									<input class="form-control mb-3 pt-2 " type="password" placeholder="***">
 								</div>
 							</div>
-							<div class="col-12">
+							<div class="col-12 makepy">
 								<div class="btn btn-primary mb-3">
 									<span class="ps-3">Make Payment</span>
 									<span class="fas fa-arrow-right"></span>
